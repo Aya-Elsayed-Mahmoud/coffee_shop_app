@@ -4,6 +4,7 @@ import '../../core/routing/app_routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../../core/utils/app_assets.dart';
+import '../auth/widgets/primary_button.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -27,9 +28,7 @@ class OnboardingScreen extends StatelessWidget {
                     style: AppTextStyles.headLineSmall,
                     textAlign: TextAlign.center,
                   ),
-
                   const SizedBox(height: 10),
-
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24),
                     child: Text(
@@ -38,26 +37,19 @@ class OnboardingScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-
                   const SizedBox(height: 30),
-
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.gold,
-                        minimumSize: const Size(double.infinity, 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
+                    child: PrimaryButton(
+                      text: "Get Started",
+                      textColor: AppColors.white,
+                      backgroundColor: AppColors.gold,
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, AppRoutes.home);
+                        Navigator.pushReplacementNamed(
+                          context,
+                          AppRoutes.signIn,
+                        );
                       },
-                      child: const Text(
-                        "Get Started",
-                        style: AppTextStyles.titleLarge,
-                      ),
                     ),
                   ),
 
