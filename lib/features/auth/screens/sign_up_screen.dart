@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
 import '../../../../core/routing/app_routes.dart';
 import '../widgets/auth_background.dart';
-import '../widgets/custom_text_field.dart';
-import '../widgets/primary_button.dart';
 import '../widgets/outlined_text_button.dart';
+import '../widgets/primary_button.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -17,6 +17,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  bool isPasswordVisible = false; // حالة إظهار/إخفاء الباسورد
 
   Future<void> _signUp() async {
     try {
@@ -49,28 +51,77 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CustomTextField(
+              // Username Field
+              TextField(
                 controller: usernameController,
-                hintText: "Enter Username",
-                prefixIcon: Icons.person,
+                decoration: const InputDecoration(
+                  hintText: "Enter Username",
+                  prefixIcon: Icon(Icons.person, color: Colors.white),
+                  filled: true,
+                  fillColor: Colors.white12,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                    borderSide: BorderSide.none,
+                  ),
+                  hintStyle: TextStyle(color: Colors.white54),
+                ),
+                style: const TextStyle(color: Colors.white),
               ),
               const SizedBox(height: 16),
-              CustomTextField(
+
+              // Email Field
+              TextField(
                 controller: emailController,
-                hintText: "Enter Email",
-                prefixIcon: Icons.email,
+                decoration: const InputDecoration(
+                  hintText: "Enter Email",
+                  prefixIcon: Icon(Icons.email, color: Colors.white),
+                  filled: true,
+                  fillColor: Colors.white12,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                    borderSide: BorderSide.none,
+                  ),
+                  hintStyle: TextStyle(color: Colors.white54),
+                ),
+                style: const TextStyle(color: Colors.white),
               ),
               const SizedBox(height: 16),
-              CustomTextField(
+
+              // Password Field مع أيقونة العين
+              TextField(
                 controller: passwordController,
-                hintText: "Enter Password",
-                prefixIcon: Icons.lock,
-                obscureText: true,
-                suffixIcon: Icons.visibility,
+                obscureText: !isPasswordVisible,
+                decoration: InputDecoration(
+                  hintText: "Enter Password",
+                  prefixIcon: const Icon(Icons.lock, color: Colors.white),
+                  filled: true,
+                  fillColor: Colors.white12,
+                  border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                    borderSide: BorderSide.none,
+                  ),
+                  hintStyle: const TextStyle(color: Colors.white54),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      isPasswordVisible
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        isPasswordVisible = !isPasswordVisible;
+                      });
+                    },
+                  ),
+                ),
+                style: const TextStyle(color: Colors.white),
               ),
               const SizedBox(height: 20),
+
               PrimaryButton(text: "Sign up", onPressed: _signUp),
               const SizedBox(height: 20),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

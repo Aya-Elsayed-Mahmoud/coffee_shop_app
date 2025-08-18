@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../core/routing/app_routes.dart';
-import '../../core/theme/app_colors.dart';
-import '../../core/theme/app_text_styles.dart';
-import '../../core/utils/app_assets.dart';
-import '../auth/widgets/primary_button.dart';
+import '../../../core/routing/app_routes.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_text_styles.dart';
+import '../../../core/utils/app_assets.dart';
+import '../../../features/auth/widgets/primary_button.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});

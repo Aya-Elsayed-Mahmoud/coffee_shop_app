@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/routing/app_routes.dart';
 import 'features/auth/screens/sign_in_screen.dart';
 import 'features/auth/screens/sign_up_screen.dart';
-import 'features/presentation/home_screen.dart';
-import 'features/presentation/onboarding_screen.dart';
+import 'home/models/product_provider.dart';
+import 'home/presentation/screens/home_screen.dart';
+import 'onboarding/presentation/ screens/onboarding_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,15 +20,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onboarding,
-      routes: {
-        AppRoutes.onboarding: (_) => const OnboardingScreen(),
-        AppRoutes.signIn: (_) => const SignInScreen(),
-        AppRoutes.signUp: (_) => const SignUpScreen(),
-        AppRoutes.homeScreen: (_) => const HomeScreen(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ProductProvider(), // ✨ هنا حطيت الـ provider
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: AppRoutes.onboarding,
+        routes: {
+          AppRoutes.onboarding: (_) => const OnboardingScreen(),
+          AppRoutes.signIn: (_) => const SignInScreen(),
+          AppRoutes.signUp: (_) => const SignUpScreen(),
+          AppRoutes.homeScreen: (_) => HomeScreen(),
+        },
+      ),
     );
   }
 }
